@@ -1,5 +1,7 @@
 package org.joesoft.sportBet;
 
+import java.util.Random;
+
 public class SimpleSportEvent implements SportEvent {
 	
 	private final String evetName;
@@ -8,6 +10,7 @@ public class SimpleSportEvent implements SportEvent {
 	private final int percentX;
 	private final long startsAt;
 	private final long endsAt;
+	private final Random random;
 	private EventResult result = EventResult.NOT_FINISHED;
 	
 	public SimpleSportEvent(String evetName, int percent1, int percent2,
@@ -18,6 +21,8 @@ public class SimpleSportEvent implements SportEvent {
 		this.percentX = percentX;
 		this.startsAt = startsAt;
 		this.endsAt = endsAt;
+		
+		this.random = new Random();
 	}
 	
 	public EventResult getResult() {
@@ -41,15 +46,15 @@ public class SimpleSportEvent implements SportEvent {
 	}
 
 	public int getPercent1() {
-		return percent1;
+		return percent1 + getRandomTwentyFivePercent();
 	}
 
 	public int getPercent2() {
-		return percent2;
+		return percent2 + getRandomTwentyFivePercent();
 	}
 
 	public int getPercentX() {
-		return percentX;
+		return percentX + getRandomTwentyFivePercent();
 	}
 
 	public long getStartsAt() {
@@ -62,5 +67,9 @@ public class SimpleSportEvent implements SportEvent {
 	
 	public void setResult(EventResult result) {
 		this.result = result;
+	}
+	
+	private int getRandomTwentyFivePercent() {
+		return random.nextInt(50) - 25;
 	}
 }

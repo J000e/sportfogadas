@@ -1,0 +1,5 @@
+// OfficeName#portNumber#MaximumBet#p
+office1#1111#1000#15
+office2#1112#800#5
+office3#1113#500#10
+office4#1114#100#30

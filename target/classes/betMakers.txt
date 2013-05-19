@@ -1,0 +1,5 @@
+// Name#initialMoney#
+Shany#5000
+Bela#2500
+Lajos#3500
+Viktor#2280
