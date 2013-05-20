@@ -1,14 +1,14 @@
 package org.joesoft.sportBet.service;
 
-import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 public class SimpleBetMakerService implements BetMakerService {
 
-	public SimpleBetMakerService(File file) {
+	public SimpleBetMakerService(InputStream file) {
 	}
 
-	public void providePorts(List<Integer> portNumbers) {
+	public void setOfficePorts(List<Integer> portNumbers) {
 		
 	}
 

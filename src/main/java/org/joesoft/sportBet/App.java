@@ -1,6 +1,6 @@
 package org.joesoft.sportBet;
 
-import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 import org.joesoft.sportBet.service.BetMakerService;
@@ -27,8 +27,8 @@ public class App {
     	initServices();
     	
     	List<Integer> portNumbers = bettingOfficeService.startBettingOffices();
-    	sportEventService.providePorts(portNumbers);
-    	betMakerService.providePorts(portNumbers);
+    	sportEventService.setOfficePorts(portNumbers);
+    	betMakerService.setOfficePorts(portNumbers);
     	
     	providePortsForEvents(portNumbers);
     	providePortsForBetMakers(portNumbers);
@@ -36,9 +36,13 @@ public class App {
     }
 
 	private void initServices() {
-		bettingOfficeService = new SimpleBettingOfficeService(new File(INIT_FILE_FOR_BETTING_OFFICES));
-		sportEventService = new SimpleSportEventService(new File(INIT_FILE_FOR_SPORT_EVENTS));
-		betMakerService = new SimpleBetMakerService(new File(INIT_FILE_FOR_BET_MAKERS));
+		bettingOfficeService = new SimpleBettingOfficeService(getInputStreamFromClassPath("/" + INIT_FILE_FOR_BETTING_OFFICES));
+		sportEventService = new SimpleSportEventService(getInputStreamFromClassPath("/" + INIT_FILE_FOR_SPORT_EVENTS));
+		betMakerService = new SimpleBetMakerService(getInputStreamFromClassPath("/" + INIT_FILE_FOR_BET_MAKERS));
+	}
+
+	private InputStream getInputStreamFromClassPath(String initFileForBettingOffices) {
+		return this.getClass().getResourceAsStream(initFileForBettingOffices);
 	}
 
 	private void providePortsForBetMakers(List<Integer> portNumbers) {

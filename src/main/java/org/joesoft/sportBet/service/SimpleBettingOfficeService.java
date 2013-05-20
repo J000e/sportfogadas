@@ -1,50 +1,37 @@
 package org.joesoft.sportBet.service;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import org.joesoft.sportBet.BettingOffice;
+import org.joesoft.sportBet.SimpleBettingOffice;
 
-public class SimpleBettingOfficeService implements BettingOfficeService {
+public class SimpleBettingOfficeService extends SimpleAbstractBaseService implements BettingOfficeService {
 
+	private static final int NAME_COLUMN = 0;
+	private static final int PORTNUMBER_COLUMN = 1;
+	private static final int MAXIMUM_BET_COLUMN = 2;
+	private static final int P_COLUMN = 3;
 	private List<BettingOffice> offices;
 
-	public SimpleBettingOfficeService(File initFile) {
+	public SimpleBettingOfficeService(InputStream initFile) {
 		offices = new ArrayList<BettingOffice>();
 		processFile(initFile);
 	}
 
-	private void processFile(File initFile) {
-		Scanner scanner = null;
-		try {
-			scanner = new Scanner(initFile);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		while(scanner.hasNext()) {
-			processLine(scanner.nextLine());
-		}
-	}
-
-	private void processLine(String nextLine) {
-		if (! isComment(nextLine)) {
-			String[] splitLine = nextLine.split("#");
-//			if (isValid(splitLine)) {
-				
-//			}
-		}
-	}
-
-	private boolean isComment(String nextLine) {
-		return nextLine.startsWith("//");
-	}
-
 	public List<Integer> startBettingOffices() {
 		return null;
+	}
+
+	@Override
+	protected void storeInformation(String[] line) {
+		String name = getStringFromArray(line, NAME_COLUMN);
+		int portNumber = getIntFromArray(line, PORTNUMBER_COLUMN);
+		int maximumBet = getIntFromArray(line, MAXIMUM_BET_COLUMN);
+		int p = getIntFromArray(line, P_COLUMN);
+		
+		offices.add(new SimpleBettingOffice(name, portNumber, maximumBet, p));
 	}
 
 }

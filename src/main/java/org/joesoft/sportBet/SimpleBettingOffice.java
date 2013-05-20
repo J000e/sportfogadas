@@ -10,6 +10,7 @@ public class SimpleBettingOffice implements BettingOffice {
 	private final int maximumBet;
 	private final int p;
 	private List<SportEvent> events;
+	
 	public SimpleBettingOffice(String name, int portNumber, int maximumBet,
 			int p) {
 		this.name = name;
